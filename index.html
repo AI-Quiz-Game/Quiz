@@ -466,7 +466,7 @@ const uiStrings = {
 mainTitle: 'AI-Powered Quiz Game',
 mainSubtitle: 'Test your knowledge on any topic!',
 topicPlaceholder: 'Enter any topic (e.g., History of India)',
-questionsCountPlaceholder: 'Number of questions (e.g., 10)',
+questionsCountPlaceholder: 'Number of questions (Maxi : 200)',
 difficultyLabel: 'Select Difficulty',
 startBtn: 'Start Quiz',
 historyTitle: 'Recent Topics:',
@@ -508,7 +508,7 @@ helpTitle: 'How to Play',
 helpText: `
 <p>1. <b>Select Language:</b> Choose your preferred language (English or Hindi) on the first screen.</p>
 <p>2. <b>Enter Topic:</b> On the start screen, type any topic you want to be quizzed on (e.g., "Indian History", "Science", "Movies").</p>
-<p>3. <b>Set Questions & Difficulty:</b> Enter the number of questions you want (1-500) and select the difficulty level (Easy, Medium, Hard).</p>
+<p>3. <b>Set Questions & Difficulty:</b> Enter the number of questions you want (1-200) and select the difficulty level (Easy, Medium, Hard).</p>
 <p>4. <b>Start Quiz:</b> Click 'Start Quiz' to begin. The AI will generate questions, which may take a few moments.</p>
 <p>5. <b>Answer Questions:</b> For each question, select one of the four options.</p>
 <p>6. <b>Review & Navigate:</b> After answering, the correct answer and an explanation will be shown.
@@ -516,6 +516,8 @@ Use 'Previous' and 'Next' buttons to navigate. 'Next' becomes 'Finish' on the la
 <p>7. <b>View Results:</b> After the last question, your final score and the total time taken will be displayed.
 You can play again or go back to the home screen.</p>
 <p>8. <b>Share Score:</b> Share your quiz results with friends!</p>
+<p>9. <b>Use this like an App:</b> You can use it like an app. Just open it in the 'Chrome browser', click on the 'three dots' at the top of the browser, and select "Add to Home screen". Doing this will place the application on your device’s Home screen, and you can use it just like an app!</p>
+`,</p>
 `,
 shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n🗒 Topic: ${topic}\n✅️ Score: ${score}/${total}\n\n😅 Can you beat my Score?\n\n⭐️ Play here, and test your knowledge on any topic 👇\n${link}`
 },
@@ -523,7 +525,7 @@ shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n�
 mainTitle: 'AI-संचालित क्विज़ गेम',
 mainSubtitle: 'किसी भी विषय पर अपनी ज्ञान की परीक्षा करें!',
 topicPlaceholder: 'कोई विषय दर्ज करें (जैसे: भारत का इतिहास)',
-questionsCountPlaceholder: 'प्रश्नों की संख्या (जैसे: 10)',
+questionsCountPlaceholder: 'प्रश्नों की संख्या (Maxi : 200)',
 difficultyLabel: 'कठिनाई स्तर चुनें',
 startBtn: 'क्विज़ शुरू करें',
 historyTitle: 'पिछला इतिहास:',
@@ -573,6 +575,7 @@ helpText: `
 <p>7. <b>परिणाम देखें:</b> अंतिम प्रश्न के बाद, आपका अंतिम स्कोर और क्विज़ पूरा करने में लगा कुल समय प्रदर्शित होगा।
 आप फिर से खेल सकते हैं या होम स्क्रीन पर वापस जा सकते हैं।</p>
 <p>8. <b>स्कोर साझा करें:</b> अपने क्विज़ परिणामों को दोस्तों के साथ साझा करें!</p>
+<p>9. <b> App की तरह use करें :</b> आप इसका use App की तरह कर सकते है। बस आपको chrome browser पर इसको open करना हैं , browser के ऊपर दोई और 'three dot' पर click करें और 'Add to Home screen' पर click करें। ऐसा करने से ये Application आपके device की Home screen पर आ जाएगा और आप इसका use एक App की तरह कर सकते है!</p>
 `,
 shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n🗒 विषय: ${topic}\n✅️ स्कोर: ${score}/${total}\n\n😅 क्या आप मेरा स्कोर हरा सकते हैं?\n\n⭐️ यहां खेलें, और अपने ज्ञान की परीक्षा करें 👇\n${link}`
 }
@@ -1194,6 +1197,7 @@ updateUIText();
 </script>
 </body>
 </html>
+
 
 
 
