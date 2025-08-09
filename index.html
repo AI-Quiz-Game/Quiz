@@ -20,6 +20,7 @@ overflow: hidden; /* Prevents scrolling on mobile */
 }
 body {
 font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+/* Updated background to match the landing page theme */
 background-color: #0d1117;
 color: #ffffff;
 display: flex;
@@ -69,11 +70,20 @@ color: #facc15;
 }
 
 
+
+
+/* Updated menu styles to fix the visibility issue before language selection */
 #side-menu {
 transition: transform 0.3s ease-in-out;
 width: 100%;
 height: 100%;
 max-width: 100vw;
+transform: translateX(-100%);
+z-index: 50; /* Ensure the menu is on top */
+position: fixed;
+inset: 0;
+background-color: rgba(13, 17, 23, 0.95);
+overflow-y: auto;
 }
 #side-menu.open {
 transform: translateX(0);
@@ -84,6 +94,8 @@ margin-bottom: 1rem;
 #menu-content p:last-child {
 margin-bottom: 0;
 }
+
+
 
 
 #game-wrapper {
@@ -98,10 +110,13 @@ box-sizing: border-box;
 }
 
 
+
+
 #app-container {
 width: 100%;
 max-width: 450px;
 aspect-ratio: 9 / 16;
+/* Updated background color for app container */
 background-color: rgba(0, 0, 0, 0.2);
 border-radius: 1.5rem;
 box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -110,6 +125,8 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 }
+
+
 
 
 @keyframes glow {
@@ -123,6 +140,8 @@ background-color: #10b981;
 }
 
 
+
+
 @keyframes half-glow {
 0% { box-shadow: 0 0 4px #34d399, 0 0 7px #34d399; }
 50% { box-shadow: 0 0 10px #10b981, 0 0 15px #10b981; }
@@ -132,6 +151,8 @@ background-color: #10b981;
 animation: half-glow 1.5s infinite alternate;
 background-color: #10b981;
 }
+
+
 
 
 /* Responsive styles for font sizes and padding to prevent text from being too large or too small */
@@ -147,6 +168,8 @@ background-color: #10b981;
 }
 
 
+
+
 @media (min-width: 641px) and (max-width: 1024px) {
 /* Medium screens (tablet) */
 #main-title, #menu-title { font-size: 2.5rem; } /* Adjusted font size for tablet */
@@ -157,6 +180,8 @@ background-color: #10b981;
 .text-lg { font-size: 1.125rem; }
 .text-xl { font-size: 1.25rem; }
 }
+
+
 
 
 @media (min-width: 1025px) {
@@ -181,7 +206,10 @@ background-color: #10b981;
 </div>
 
 
-<div id="side-menu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-50 hidden transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+
+
+<!-- The 'hidden' class has been removed to allow the menu to be toggleable from the start -->
+<div id="side-menu" class="fixed inset-0 bg-gray-900 bg-opacity-95 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
 <div class="p-6 text-right">
 <button id="close-menu-btn" class="text-white text-3xl font-bold focus:outline-none">&times;</button>
 </div>
@@ -194,12 +222,16 @@ background-color: #10b981;
 </ul>
 
 
+
+
 <div id="menu-content" class="mt-8 p-4 bg-gray-800/50 rounded-lg max-w-lg mx-auto">
 <h3 id="menu-content-title" class="text-2xl font-semibold text-pink-300 mb-4 text-center"></h3>
 <div id="menu-content-text" class="text-gray-300 leading-relaxed"></div>
 </div>
 </div>
 </div>
+
+
 
 
 <div id="language-selection-screen" class="p-8 rounded-2xl shadow-2xl card text-center">
@@ -213,9 +245,13 @@ background-color: #10b981;
 </div>
 
 
+
+
 <div id="start-screen" class="hidden p-8 rounded-2xl shadow-2xl card">
 <h1 id="main-title" class="text-3xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500"></h1>
 <p id="main-subtitle" class="text-gray-300 text-base md:text-lg mb-6"></p>
+
+
 
 
 <div class="space-y-4 mb-6">
@@ -230,7 +266,11 @@ background-color: #10b981;
 </div>
 
 
+
+
 <button id="start-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg text-lg md:text-xl btn shadow-lg mb-6"></button>
+
+
 
 
 <div id="history-container" class="mt-6 text-left">
@@ -239,6 +279,8 @@ background-color: #10b981;
 </ul>
 </div>
 </div>
+
+
 
 
 <div id="quiz-screen" class="hidden p-6 rounded-2xl shadow-2xl card">
@@ -263,6 +305,8 @@ background-color: #10b981;
 </div>
 
 
+
+
 <div id="results-screen" class="hidden text-center p-8 rounded-2xl shadow-2xl card">
 <h2 id="results-title" class="text-2xl font-bold mb-4 text-purple-400"></h2>
 <p id="final-score-text" class="text-xl mb-4"></p>
@@ -278,6 +322,8 @@ Join Our WhatsApp Channel
 </div>
 
 
+
+
 <div id="loader" class="hidden text-center p-8">
 <div class="flex justify-center items-center">
 <div class="animate-spin rounded-full h-12 w-12 border-b-4 border-purple-400"></div>
@@ -286,11 +332,15 @@ Join Our WhatsApp Channel
 </div>
 
 
+
+
 <div id="message-box" class="hidden fixed top-5 right-5 bg-red-500 text-white py-2 px-4 rounded-lg shadow-lg animate-pulse z-50">
 <p id="message-text"></p>
 </div>
 </div>
 </div>
+
+
 
 
 <script>
@@ -308,6 +358,8 @@ const loader = document.getElementById('loader');
 const aiMistakesText = document.getElementById('ai-mistakes-text');
 
 
+
+
 const langEnBtn = document.getElementById('lang-en-btn');
 const langHiBtn = document.getElementById('lang-hi-btn');
 const startBtn = document.getElementById('start-btn');
@@ -320,6 +372,8 @@ const shareScoreBtn = document.getElementById('share-score-btn');
 const whatsappChannelBtnResults = document.getElementById('whatsapp-channel-btn-results');
 
 
+
+
 const menuToggleBtn = document.getElementById('menu-toggle-btn');
 const sideMenu = document.getElementById('side-menu');
 const closeMenuBtn = document.getElementById('close-menu-btn');
@@ -330,6 +384,8 @@ const menuHelpBtn = document.getElementById('menu-help-btn');
 const menuContent = document.getElementById('menu-content');
 const menuContentTitle = document.getElementById('menu-content-title');
 const menuContentText = document.getElementById('menu-content-text');
+
+
 
 
 const topicInput = document.getElementById('topic-input');
@@ -351,6 +407,8 @@ const messageBox = document.getElementById('message-box');
 const messageText = document.getElementById('message-text');
 
 
+
+
 let questions = [];
 let userAnswers = [];
 let currentQuestionIndex = 0;
@@ -360,9 +418,15 @@ let currentTopic = '';
 let totalTimer = null;
 let startTime = 0;
 let elapsedTime = 0;
+// Hardcoded link for sharing
+const gameLink = '';
+
+
 
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+
 
 
 function playSound(frequency, type, duration = 0.1) {
@@ -370,21 +434,31 @@ const oscillator = audioContext.createOscillator();
 const gainNode = audioContext.createGain();
 
 
+
+
 oscillator.type = type;
 oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+
+
 
 
 gainNode.gain.setValueAtTime(0.5, audioContext.currentTime);
 gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration);
 
 
+
+
 oscillator.connect(gainNode);
 gainNode.connect(audioContext.destination);
+
+
 
 
 oscillator.start();
 oscillator.stop(audioContext.currentTime + duration);
 }
+
+
 
 
 const uiStrings = {
@@ -418,6 +492,8 @@ apiCountWarning: (count) => `The AI could only generate ${count} questions.`,
 invalidJson: 'Received invalid data from AI. Please try again.',
 
 
+
+
 menuTitle: 'Menu',
 menuHome: 'Home',
 menuDescription: 'Description',
@@ -432,7 +508,7 @@ helpTitle: 'How to Play',
 helpText: `
 <p>1. <b>Select Language:</b> Choose your preferred language (English or Hindi) on the first screen.</p>
 <p>2. <b>Enter Topic:</b> On the start screen, type any topic you want to be quizzed on (e.g., "Indian History", "Science", "Movies").</p>
-<p>3. <b>Set Questions & Difficulty:</b> Enter the number of questions you want (1-500) and select the difficulty level (Easy, Medium, Hard).</p>
+<p>3. <b>Set Questions & Difficulty:</b> Enter the number of questions you want (1-200) and select the difficulty level (Easy, Medium, Hard).</p>
 <p>4. <b>Start Quiz:</b> Click 'Start Quiz' to begin. The AI will generate questions, which may take a few moments.</p>
 <p>5. <b>Answer Questions:</b> For each question, select one of the four options.</p>
 <p>6. <b>Review & Navigate:</b> After answering, the correct answer and an explanation will be shown.
@@ -441,7 +517,8 @@ Use 'Previous' and 'Next' buttons to navigate. 'Next' becomes 'Finish' on the la
 You can play again or go back to the home screen.</p>
 <p>8. <b>Share Score:</b> Share your quiz results with friends!</p>
 <p>9. <b>Use it like an app :</b>You can use it like an app. Just open it in the Chrome browser, click on the three dots at the top of the browser, and select "Add to Home screen". Doing this will place the application on your device’s Home screen, and you can use it just like an app !</p>
-`
+`,
+shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n🗒 Topic: ${topic}\n✅️ Score: ${score}/${total}\n\n😅 Can you beat my Score?\n\n⭐️ Play here, and test your knowledge on any topic 👇\n${link}`
 },
 'hi': {
 mainTitle: 'AI-संचालित क्विज़ गेम',
@@ -473,6 +550,8 @@ apiCountWarning: (count) => `AI केवल ${count} प्रश्न ही 
 invalidJson: 'AI से अमान्य डेटा प्राप्त हुआ। कृपया पुनः प्रयास करें।',
 
 
+
+
 menuTitle: 'मेनू',
 menuHome: 'होम',
 menuDescription: 'विवरण',
@@ -491,52 +570,17 @@ helpText: `
 <p>4. <b>क्विज़ शुरू करें:</b> क्विज़ शुरू करें पर क्लिक करें। AI प्रश्न तैयार करेगा, जिसमें कुछ क्षण लग सकते हैं।</p>
 <p>5. <b>प्रश्नों का उत्तर दें:</b> प्रत्येक प्रश्न के लिए, चार विकल्पों में से एक चुनें।</p>
 <p>6. <b>समीक्षा करें और नेविगेट करें:</b> उत्तर देने के बाद, सही उत्तर और एक स्पष्टीकरण दिखाया जाएगा।
-नेविगेट करने के लिए 'पिछला' और 'अगला' बटन का उपयोग करें। अंतिम प्रश्न पर 'अगला' बटन 'समाप्त' में बदल जाएगा।</p>
+यूज 'पिछला' और 'अगला' बटन का उपयोग करें। अंतिम प्रश्न पर 'अगला' बटन 'समाप्त' में बदल जाएगा।</p>
 <p>7. <b>परिणाम देखें:</b> अंतिम प्रश्न के बाद, आपका अंतिम स्कोर और क्विज़ पूरा करने में लगा कुल समय प्रदर्शित होगा।
 आप फिर से खेल सकते हैं या होम स्क्रीन पर वापस जा सकते हैं।</p>
 <p>8. <b>स्कोर साझा करें:</b> अपने क्विज़ परिणामों को दोस्तों के साथ साझा करें!</p>
 <p>9. <b>App की तरह use करे:</b>आप इसे एक ऐप की तरह इस्तेमाल कर सकते हैं। बस इसे क्रोम ब्राउज़र में खोलें, ब्राउज़र में सबसे ऊपर दिए गए तीन बिंदुओं पर क्लिक करें और "होम स्क्रीन में जोड़ें" चुनें। ऐसा करने से यह ऐप आपके डिवाइस की होम स्क्रीन पर आ जाएगा और आप इसे ऐप की तरह इस्तेमाल कर सकते हैं।</p>
-`
+`,
+shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n🗒 विषय: ${topic}\n✅️ स्कोर: ${score}/${total}\n\n😅 क्या आप मेरा स्कोर हरा सकते हैं?\n\n⭐️ यहां खेलें, और अपने ज्ञान की परीक्षा करें 👇\n${link}`
 }
 };
 
 
-function shuffleArray(array) {
-for (let i = array.length - 1; i > 0; i--) {
-const j = Math.floor(Math.random() * (i + 1));
-[array[i], array[j]] = [array[j], array[i]];
-}
-}
-
-
-function startTotalTimer() {
-startTime = Date.now();
-totalTimer = setInterval(() => {
-const now = Date.now();
-elapsedTime = Math.floor((now - startTime) / 1000);
-totalTimerDisplay.textContent = `${uiStrings[currentLanguage].timerText}: ${elapsedTime}s`;
-}, 1000);
-}
-
-
-function clearTotalTimer() {
-if (totalTimer) {
-clearInterval(totalTimer);
-totalTimer = null;
-}
-}
-
-
-function setLanguage(lang) {
-currentLanguage = lang;
-document.documentElement.lang = lang;
-updateUIText();
-langScreen.classList.add('hidden');
-startScreen.classList.remove('hidden');
-loadTopicHistory();
-updateMenuContent('description');
-aiMistakesText.classList.remove('hidden');
-}
 
 
 function updateUIText() {
@@ -560,15 +604,62 @@ shareScoreBtn.textContent = t.shareScoreBtn;
 whatsappChannelBtnResults.textContent = t.whatsappChannelBtn;
 
 
+
+
 menuTitle.textContent = t.menuTitle;
 menuHomeBtn.textContent = t.menuHome;
 menuDescriptionBtn.textContent = t.menuDescription;
 menuHelpBtn.textContent = t.menuHelp;
-if (!sideMenu.classList.contains('hidden')) {
-const activeMenuSection = menuContentText.dataset.activeSection || 'description';
-updateMenuContent(activeMenuSection);
+// The menu content is updated here to ensure correct language is shown
+updateMenuContent(menuContentText.dataset.activeSection || 'description');
+}
+
+
+
+
+function shuffleArray(array) {
+for (let i = array.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1));
+[array[i], array[j]] = [array[j], array[i]];
 }
 }
+
+
+
+
+function startTotalTimer() {
+startTime = Date.now();
+totalTimer = setInterval(() => {
+const now = Date.now();
+elapsedTime = Math.floor((now - startTime) / 1000);
+totalTimerDisplay.textContent = `${uiStrings[currentLanguage].timerText}: ${elapsedTime}s`;
+}, 1000);
+}
+
+
+
+
+function clearTotalTimer() {
+if (totalTimer) {
+clearInterval(totalTimer);
+totalTimer = null;
+}
+}
+
+
+
+
+function setLanguage(lang) {
+currentLanguage = lang;
+document.documentElement.lang = lang;
+updateUIText();
+langScreen.classList.add('hidden');
+startScreen.classList.remove('hidden');
+loadTopicHistory();
+aiMistakesText.classList.remove('hidden');
+}
+
+
 
 
 function showMessage(message) {
@@ -578,11 +669,15 @@ setTimeout(() => messageBox.classList.add('hidden'), 3000);
 }
 
 
+
+
 async function startGame() {
 const topic = topicInput.value.trim();
 const questionCount = parseInt(questionsCountInput.value);
 const difficulty = difficultyInput.value;
 currentTopic = topic;
+
+
 
 
 if (!topic) {
@@ -595,9 +690,13 @@ return;
 }
 
 
+
+
 startScreen.classList.add('hidden');
 loader.classList.remove('hidden');
 document.getElementById('loader-text').textContent = uiStrings[currentLanguage].loaderText;
+
+
 
 
 try {
@@ -605,8 +704,12 @@ await fetchQuizData(topic, questionCount, difficulty);
 saveTopicHistory(topic);
 
 
+
+
 loader.classList.add('hidden');
 quizScreen.classList.remove('hidden');
+
+
 
 
 currentQuestionIndex = 0;
@@ -614,6 +717,8 @@ score = 0;
 userAnswers = new Array(questions.length).fill(null);
 scoreDisplay.textContent = `${uiStrings[currentLanguage].score}: 0`;
 startTotalTimer();
+
+
 
 
 displayQuestion();
@@ -626,6 +731,8 @@ startScreen.classList.remove('hidden');
 }
 
 
+
+
 async function fetchQuizData(topic, count, difficulty, retries = 3, delay = 1000) {
 const langInstruction = currentLanguage === 'hi'
 ? `सभी टेक्स्ट (प्रश्न, विकल्प, उत्तर, स्पष्टीकरण) केवल हिंदी में होने चाहिए।`
@@ -633,10 +740,14 @@ const langInstruction = currentLanguage === 'hi'
 const difficultyInstruction = `Questions should be of ${difficulty} difficulty level.`;
 
 
+
+
 const prompt = `Create a multiple-choice quiz on the topic "${topic}". It should have ${count} questions.
 Provide output in JSON format. The JSON should be an array of objects.
 Each object must have four keys: 'question' (string), 'options' (an array of 4 strings), 'answer' (the correct answer string), and 'explanation' (a brief explanation of the correct answer).
 ${langInstruction} ${difficultyInstruction} Return only the JSON object, no other text.`;
+
+
 
 
 const payload = {
@@ -660,8 +771,12 @@ required: ["question", "options", "answer", "explanation"]
 };
 
 
+
+
 const apiKey = "AIzaSyBLw7RbzlVYQyDEiTnCpv0lby878ds2nqY";
 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+
 
 
 for (let i = 0; i < retries; i++) {
@@ -671,6 +786,8 @@ method: 'POST',
 headers: { 'Content-Type': 'application/json' },
 body: JSON.stringify(payload)
 });
+
+
 
 
 if (!response.ok) {
@@ -684,7 +801,11 @@ throw new Error(`API Error: ${response.status} ${response.statusText}`);
 }
 
 
+
+
 const result = await response.json();
+
+
 
 
 if (result.candidates && result.candidates[0] && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
@@ -695,6 +816,8 @@ if (!Array.isArray(questions) || questions.length === 0) {
 throw new Error(uiStrings[currentLanguage].invalidJson);
 }
 shuffleArray(questions);
+
+
 
 
 if (questions.length < count) {
@@ -718,9 +841,13 @@ console.warn(`Attempt ${i + 1} failed, retrying...`, error);
 }
 
 
+
+
 function displayQuestion() {
 explanationContainer.classList.add('hidden');
 optionsContainer.innerHTML = '';
+
+
 
 
 const currentQuestion = questions[currentQuestionIndex];
@@ -728,8 +855,12 @@ questionText.textContent = currentQuestion.question;
 progressText.textContent = `${uiStrings[currentLanguage].questionProgress} ${currentQuestionIndex + 1} / ${questions.length}`;
 
 
+
+
 const shuffledOptions = [...currentQuestion.options];
 shuffleArray(shuffledOptions);
+
+
 
 
 shuffledOptions.forEach(option => {
@@ -741,6 +872,8 @@ optionsContainer.appendChild(button);
 });
 
 
+
+
 if (userAnswers[currentQuestionIndex] !== null) {
 showAnswerResult(userAnswers[currentQuestionIndex]);
 }
@@ -749,11 +882,17 @@ nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? uiStrings[
 }
 
 
+
+
 function handleOptionClick(selectedOption, clickedButton) {
 if (userAnswers[currentQuestionIndex] !== null) return;
 
 
+
+
 userAnswers[currentQuestionIndex] = { selected: selectedOption };
+
+
 
 
 if (selectedOption.trim() === questions[currentQuestionIndex].answer.trim()) {
@@ -765,13 +904,19 @@ playSound(200, 'square');
 }
 
 
+
+
 showAnswerResult(userAnswers[currentQuestionIndex]);
 }
+
+
 
 
 function showAnswerResult(answerData) {
 const correctAnswer = questions[currentQuestionIndex].answer;
 const allOptionButtons = optionsContainer.querySelectorAll('.option-btn');
+
+
 
 
 allOptionButtons.forEach(btn => {
@@ -786,9 +931,13 @@ btn.classList.add('incorrect');
 });
 
 
+
+
 explanationText.textContent = questions[currentQuestionIndex].explanation;
 explanationContainer.classList.remove('hidden');
 }
+
+
 
 
 function goToPreviousQuestion() {
@@ -797,6 +946,8 @@ currentQuestionIndex--;
 displayQuestion();
 }
 }
+
+
 
 
 function goToNextQuestion() {
@@ -809,6 +960,8 @@ showResults();
 }
 
 
+
+
 function showResults() {
 clearTotalTimer();
 quizScreen.classList.add('hidden');
@@ -818,21 +971,41 @@ finalTimeText.innerHTML = `${uiStrings[currentLanguage].finalTime} <br> <span cl
 }
 
 
+
+
 function shareScore() {
-const shareText = `${uiStrings[currentLanguage].finalScore} ${score} / ${questions.length} in ${elapsedTime}s on the AI-Powered Quiz Game! Topic: ${currentTopic}. Can you beat my score?`;
+const t = uiStrings[currentLanguage];
+const shareText = t.shareMessage(
+t.mainTitle,
+score,
+questions.length,
+currentTopic,
+gameLink
+);
+
+
 
 
 if (navigator.share) {
+// Use the Web Share API if available
 navigator.share({
-title: uiStrings[currentLanguage].mainTitle,
+title: t.mainTitle,
 text: shareText,
-url: window.location.href
-}).catch((error) => console.error('Error sharing:', error));
+url: gameLink
+}).catch((error) => {
+console.error('Error sharing with Web Share API:', error);
+// Fallback to WhatsApp
+const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+window.open(whatsappUrl, '_blank');
+});
 } else {
-showMessage('Web Share API not supported. You can manually copy your score: ' + shareText);
-console.log('Share fallback: ' + shareText);
+// Direct fallback to WhatsApp
+const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+window.open(whatsappUrl, '_blank');
 }
 }
+
+
 
 
 function resetGame() {
@@ -842,7 +1015,10 @@ startScreen.classList.add('hidden');
 quizScreen.classList.add('hidden');
 resultsScreen.classList.add('hidden');
 loader.classList.add('hidden');
-sideMenu.classList.add('hidden', '-translate-x-full');
+sideMenu.classList.remove('open');
+sideMenu.classList.add('-translate-x-full');
+
+
 
 
 topicInput.value = '';
@@ -857,11 +1033,15 @@ elapsedTime = 0;
 }
 
 
+
+
 function getHistory() {
 const historyKey = `quizTopicHistory_${currentLanguage}`;
 const history = localStorage.getItem(historyKey);
 return history ? JSON.parse(history) : [];
 }
+
+
 
 
 function loadTopicHistory() {
@@ -871,6 +1051,8 @@ if (history.length === 0) {
 historyContainer.classList.add('hidden');
 return;
 }
+
+
 
 
 historyContainer.classList.remove('hidden');
@@ -886,6 +1068,8 @@ topicHistoryList.prepend(li);
 }
 
 
+
+
 function saveTopicHistory(topic) {
 let history = getHistory();
 history = history.filter(t => t.toLowerCase() !== topic.toLowerCase());
@@ -897,16 +1081,21 @@ loadTopicHistory();
 }
 
 
+
+
 function toggleMenu() {
-sideMenu.classList.toggle('hidden');
 sideMenu.classList.toggle('open');
 sideMenu.classList.toggle('-translate-x-full');
 }
 
 
+
+
 function updateMenuContent(section) {
 const t = uiStrings[currentLanguage];
 menuContentText.dataset.activeSection = section;
+
+
 
 
 const existingWhatsappButton = document.getElementById('whatsapp-channel-btn-menu');
@@ -915,9 +1104,13 @@ existingWhatsappButton.remove();
 }
 
 
+
+
 if (section === 'description') {
 menuContentTitle.textContent = t.descriptionTitle;
 menuContentText.innerHTML = t.descriptionText;
+
+
 
 
 let whatsappButtonInMenu = document.createElement('button');
@@ -926,12 +1119,12 @@ whatsappButtonInMenu.textContent = t.whatsappChannelBtn;
 whatsappButtonInMenu.classList.add('w-full', 'bg-emerald-500', 'hover:bg-emerald-600', 'text-white', 'font-bold', 'py-3', 'px-6', 'rounded-lg', 'text-lg', 'btn', 'shadow-lg', 'mt-4', 'whatsapp-half-glow-btn');
 
 
-menuContentText.appendChild(whatsappButtonInMenu);
 
 
 whatsappButtonInMenu.addEventListener('click', () => {
 window.open('https://whatsapp.com/channel/0029Vb6ZMmI3wtb6E8Jw3w28', '_blank');
 });
+menuContentText.appendChild(whatsappButtonInMenu);
 } else if (section === 'help') {
 menuContentTitle.textContent = t.helpTitle;
 menuContentText.innerHTML = t.helpText;
@@ -940,6 +1133,8 @@ menuContentTitle.textContent = '';
 menuContentText.innerHTML = '';
 }
 }
+
+
 
 
 langEnBtn.addEventListener('click', () => setLanguage('en'));
@@ -956,6 +1151,8 @@ window.open('https://whatsapp.com/channel/0029Vb6ZMmI3wtb6E8Jw3w28', '_blank');
 });
 
 
+
+
 menuToggleBtn.addEventListener('click', toggleMenu);
 closeMenuBtn.addEventListener('click', toggleMenu);
 menuHomeBtn.addEventListener('click', () => {
@@ -966,10 +1163,14 @@ menuDescriptionBtn.addEventListener('click', () => updateMenuContent('descriptio
 menuHelpBtn.addEventListener('click', () => updateMenuContent('help'));
 
 
+
+
 // Adjust the app-container size on window resize
 window.addEventListener('resize', () => {
 const appContainer = document.getElementById('app-container');
 const gameWrapper = document.getElementById('game-wrapper');
+
+
 
 
 // Set the aspect ratio and a max width for desktop view
@@ -978,13 +1179,19 @@ const aspectRatio = 9 / 16;
 const currentWidth = Math.min(gameWrapper.clientWidth, maxWidth);
 
 
+
+
 appContainer.style.width = `${currentWidth}px`;
 appContainer.style.height = `${currentWidth / aspectRatio}px`;
 });
 
 
-// Initial call to set the size correctly on load
+
+
+// Initial call to set the size correctly on load and to pre-populate menu
 window.dispatchEvent(new Event('resize'));
+updateMenuContent('description');
+updateUIText();
 });
 </script>
 </body>
