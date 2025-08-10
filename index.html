@@ -3,41 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Quiz Game (Advanced)</title>
+<title>AI Quiz Game (Futuristic)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* Ensures the entire page takes up the full viewport height */
+/* Base Styles */
 html, body {
 height: 100%;
 width: 100%;
 margin: 0;
 padding: 0;
-overflow: hidden; /* Prevents scrolling on mobile */
+overflow: hidden;
+font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+color: #e2e8f0;
 }
 
+/* Futuristic Animated Background */
 body {
-font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
-background-color: #0d0c1d; /* Deep blue-violet base */
-color: #ffffff;
 display: flex;
 justify-content: center;
 align-items: center;
-position: relative; /* For particle animation positioning */
-}
-
-/* Futuristic background animation */
-#bg-particles {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 0;
-background: linear-gradient(45deg, #0f172a, #1a083f, #0f172a, #083f3f);
+background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
 background-size: 400% 400%;
 animation: gradient-animation 15s ease infinite;
 }
@@ -48,45 +36,33 @@ animation: gradient-animation 15s ease infinite;
 100% { background-position: 0% 50%; }
 }
 
-/* Keyframe for the dynamic border glow - Reduced intensity */
-@keyframes border-glow {
-0% {
-box-shadow: 0 0 5px #4d3393, 0 0 10px #4d3393, 0 0 15px #4d3393, inset 0 0 5px #4d3393;
-}
-50% {
-box-shadow: 0 0 10px #8250f2, 0 0 20px #8250f2, 0 0 30px #8250f2, inset 0 0 10px #8250f2;
-}
-100% {
-box-shadow: 0 0 5px #4d3393, 0 0 10px #4d3393, 0 0 15px #4d3393, inset 0 0 5px #4d3393;
-}
-}
-
-/* Updated card style to cover the entire screen */
-.card {
-background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
-backdrop-filter: blur(10px);
-border: 1px solid rgba(255, 255, 255, 0.1);
+/* Glassmorphism Effect for Containers */
+.futuristic-card {
+background-color: rgba(255, 255, 255, 0.1);
+backdrop-filter: blur(15px);
+border: 1px solid rgba(255, 255, 255, 0.2);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+border-radius: 1.5rem;
 max-height: 95%;
 overflow-y: auto;
-position: relative; /* For z-index to be on top of particles */
-z-index: 10;
-animation: border-glow 3s infinite alternate; /* Apply the glow animation */
 }
 
-.btn {
-transition: all 0.3s ease;
+/* Button Animations */
+.btn-futuristic {
+transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+transform: perspective(1px) translateZ(0);
+box-shadow: 0 0 1px rgba(0, 0, 0, 0);
 }
-.btn:hover {
-transform: translateY(-2px) scale(1.05); /* Lifts and scales slightly */
-box-shadow: 0 8px 25px rgba(0, 255, 255, 0.3); /* Cyan shadow on hover */
-background-color: #2e0861; /* Darker, more intense background on hover */
+.btn-futuristic:hover {
+transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(0,0,0,0.25), 0 6px 6px rgba(0,0,0,0.22);
 }
 
-/* Existing styles for correct/incorrect answers */
 .option-btn.correct {
-background-color: #06b6d4 !important; /* Brighter cyan */
-border-color: #0e7490 !important;
+background-color: #22c55e !important;
+border-color: #16a34a !important;
 color: white !important;
+animation: pulse-correct 1s infinite;
 }
 .option-btn.incorrect {
 background-color: #ef4444 !important;
@@ -98,62 +74,10 @@ cursor: not-allowed;
 opacity: 0.7;
 }
 
-#topic-history li {
-cursor: pointer;
-transition: background-color 0.2s;
-}
-#topic-history li:hover {
-background-color: #4a044e;
-}
-#total-timer-display {
-font-size: 1.2rem;
-font-weight: bold;
-color: #facc15;
-}
-
-#side-menu {
-transition: transform 0.3s ease-in-out;
-width: 100%;
-height: 100%;
-max-width: 100vw;
-transform: translateX(-100%);
-z-index: 50;
-position: fixed;
-inset: 0;
-background-color: rgba(13, 17, 23, 0.95);
-overflow-y: auto;
-}
-#side-menu.open {
-transform: translateX(0);
-}
-#menu-content p {
-margin-bottom: 1rem;
-}
-#menu-content p:last-child {
-margin-bottom: 0;
-}
-
-#game-wrapper {
-width: 100vw;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 1rem;
-box-sizing: border-box;
-}
-
-/* Updated app-container to fill the entire screen space in game-wrapper */
-#app-container {
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.2);
-border-radius: 1.5rem;
-box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-padding: 1rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
+/* Pulsing effect for correct answer */
+@keyframes pulse-correct {
+0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
 }
 
 /* Progress Bar Styling */
@@ -168,99 +92,50 @@ margin-top: 1rem;
 #progress-bar {
 height: 100%;
 width: 0%;
-background: linear-gradient(to right, #8250f2, #c026d3);
+background: linear-gradient(to right, #6d28d9, #c026d3);
 transition: width 0.4s ease-in-out;
 border-radius: 9999px;
 }
 
-/* New: Visual feedback for answers */
-@keyframes bg-flash-correct {
-0% { background-color: rgba(13, 12, 29, 1); }
-50% { background-color: #10B981; } /* Brighter green */
-100% { background-color: rgba(13, 12, 29, 1); }
+/* General Layout */
+#game-wrapper {
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1rem;
+box-sizing: border-box;
 }
 
-@keyframes bg-flash-incorrect {
-0% { background-color: rgba(13, 12, 29, 1); }
-50% { background-color: #EF4444; } /* Brighter red */
-100% { background-color: rgba(13, 12, 29, 1); }
+#app-container {
+width: 100%;
+max-width: 450px;
+aspect-ratio: 9 / 16;
+background-color: rgba(0, 0, 0, 0.2);
+border-radius: 1.5rem;
+padding: 1.5rem;
+display: flex;
+flex-direction: column;
+justify-content: center;
 }
 
-.bg-flash-correct {
-animation: bg-flash-correct 0.5s ease-in-out;
-}
-.bg-flash-incorrect {
-animation: bg-flash-incorrect 0.5s ease-in-out;
-}
-
-/* Keyframe for the whatsapp button glow - Reduced intensity */
-@keyframes glow {
-0% { box-shadow: 0 0 4px #06b6d4, 0 0 7px #06b6d4, 0 0 12px #06b6d4; }
-50% { box-shadow: 0 0 12px #06b6d4, 0 0 20px #06b6d4, 0 0 30px #06b6d4; }
-100% { box-shadow: 0 0 4px #06b6d4, 0 0 7px #06b6d4, 0 0 12px #06b6d4; }
-}
-.whatsapp-glow-btn {
-animation: glow 1.5s infinite alternate;
-background-color: #10b981;
-}
-
-/* Keyframe for the whatsapp half glow button - Reduced intensity */
-@keyframes half-glow {
-0% { box-shadow: 0 0 2px #06b6d4, 0 0 3px #06b6d4; }
-50% { box-shadow: 0 0 5px #06b6d4, 0 0 7px #06b6d4; }
-100% { box-shadow: 0 0 2px #06b6d4, 0 0 3px #06b6d4; }
-}
-.whatsapp-half-glow-btn {
-animation: half-glow 1.5s infinite alternate;
-background-color: #10b981;
-}
-
-/* New: Streak Counter Styling */
-#streak-counter {
-font-family: 'Audiowide', sans-serif;
-color: #facc15;
-text-shadow: 0 0 5px #facc15, 0 0 10px #facc15;
-transition: all 0.3s ease;
-}
-
-/* Responsive styles for font sizes and padding to prevent text from being too large or too small */
+/* Responsive Font Sizing */
 @media (max-width: 640px) {
 #main-title, #menu-title { font-size: 2rem; }
 #main-subtitle, #final-score-text, #final-time-text, #loader-text { font-size: 1rem; }
-#quiz-screen .p-6 { padding: 1rem; }
-#question-text { font-size: 1rem; }
-.option-btn { font-size: 0.875rem; padding: 0.75rem; }
 .text-lg { font-size: 1rem; }
 .text-xl { font-size: 1.125rem; }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
-#main-title, #menu-title { font-size: 2.5rem; }
-#main-subtitle, #final-score-text, #final-time-text, #loader-text { font-size: 1.125rem; }
-#quiz-screen .p-6 { padding: 1.5rem; }
-#question-text { font-size: 1.125rem; }
-.option-btn { font-size: 1rem; padding: 1rem; }
-.text-lg { font-size: 1.125rem; }
-.text-xl { font-size: 1.25rem; }
-}
-
-@media (min-width: 1025px) {
-#main-title, #menu-title { font-size: 4rem; }
-#main-subtitle, #final-score-text, #final-time-text, #loader-text { font-size: 1.25rem; }
-#quiz-screen .p-6 { padding: 2rem; }
-#question-text { font-size: 1.25rem; }
-.option-btn { font-size: 1.125rem; padding: 1.25rem; }
-.text-lg { font-size: 1.25rem; }
-.text-xl { font-size: 1.5rem; }
-}
 </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4">
-<div id="bg-particles"></div>
+<body class="bg-gray-900 text-white">
 <div id="game-wrapper">
-<div id="app-container" class="card">
+<div id="app-container">
+
 <div id="menu-button-container" class="fixed top-4 left-4 z-50">
-<button id="menu-toggle-btn" class="p-2 rounded-full bg-purple-700 hover:bg-purple-800 text-white shadow-lg focus:outline-none">
+<button id="menu-toggle-btn" class="p-3 rounded-full bg-indigo-700 hover:bg-indigo-600 text-white shadow-lg focus:outline-none btn-futuristic">
 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
 </button>
 </div>
@@ -270,96 +145,92 @@ transition: all 0.3s ease;
 <button id="close-menu-btn" class="text-white text-3xl font-bold focus:outline-none">&times;</button>
 </div>
 <div class="p-6">
-<h2 id="menu-title" class="text-3xl font-bold text-purple-400 mb-6 text-center"></h2>
+<h2 id="menu-title" class="text-3xl font-bold text-indigo-400 mb-6 text-center"></h2>
 <ul class="space-y-4 text-center">
-<li><button id="menu-home-btn" class="text-xl text-white hover:text-purple-300 focus:outline-none font-bold underline"></button></li>
-<li><button id="menu-description-btn" class="text-xl text-white hover:text-purple-300 focus:outline-none font-bold underline"></button></li>
-<li><button id="menu-help-btn" class="text-xl text-white hover:text-purple-300 focus:outline-none font-bold underline"></button></li>
+<li><button id="menu-home-btn" class="text-xl text-white hover:text-indigo-300 focus:outline-none font-bold underline"></button></li>
+<li><button id="menu-description-btn" class="text-xl text-white hover:text-indigo-300 focus:outline-none font-bold underline"></button></li>
+<li><button id="menu-help-btn" class="text-xl text-white hover:text-indigo-300 focus:outline-none font-bold underline"></button></li>
 </ul>
-
-<div id="menu-content" class="mt-8 p-4 bg-gray-800/50 rounded-lg max-w-lg mx-auto">
-<h3 id="menu-content-title" class="text-2xl font-semibold text-pink-300 mb-4 text-center"></h3>
-<div id="menu-content-text" class="text-gray-300 leading-relaxed"></div>
+<div id="menu-content" class="mt-8 p-4 bg-white bg-opacity-10 rounded-lg max-w-lg mx-auto futuristic-card">
+<h3 id="menu-content-title" class="text-2xl font-semibold text-purple-300 mb-4 text-center"></h3>
+<div id="menu-content-text" class="text-gray-200 leading-relaxed"></div>
 </div>
 </div>
 </div>
 
-<div id="language-selection-screen" class="p-8 rounded-2xl shadow-2xl card text-center">
-<h1 class="text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-500">Welcome!</h1>
+<div id="language-selection-screen" class="p-8 futuristic-card text-center">
+<h1 class="text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">Welcome!</h1>
 <p class="text-gray-300 mb-8 text-base">Please select your language / कृपया अपनी भाषा चुनें</p>
 <p id="ai-mistakes-text" class="text-yellow-400 text-sm mb-4 hidden">AI can make mistakes.</p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-<button id="lang-en-btn" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn shadow-lg">English</button>
-<button id="lang-hi-btn" class="w-full sm:w-auto bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn shadow-lg">हिन्दी</button>
+<button id="lang-en-btn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-futuristic shadow-lg">English</button>
+<button id="lang-hi-btn" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg text-lg btn-futuristic shadow-lg">हिन्दी</button>
 </div>
 </div>
 
-<div id="start-screen" class="hidden p-8 rounded-2xl shadow-2xl card">
-<h1 id="main-title" class="text-3xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-violet-500"></h1>
+<div id="start-screen" class="hidden p-8 futuristic-card">
+<h1 id="main-title" class="text-3xl md:text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500"></h1>
 <p id="main-subtitle" class="text-gray-300 text-base md:text-lg mb-6"></p>
 
 <div class="space-y-4 mb-6">
-<input type="text" id="topic-input" class="w-full bg-gray-800 text-white placeholder-gray-400 border-2 border-gray-700 rounded-lg py-3 px-4 text-center text-base md:text-lg focus:outline-none focus:border-cyan-500 transition-colors" aria-label="Enter quiz topic">
-<input type="number" id="questions-count-input" class="w-full bg-gray-800 text-white placeholder-gray-400 border-2 border-gray-700 rounded-lg py-3 px-4 text-center text-base md:text-lg focus:outline-none focus:border-cyan-500 transition-colors" min="1" max="500" aria-label="Number of questions">
+<input type="text" id="topic-input" class="w-full bg-white bg-opacity-10 text-white placeholder-gray-400 border-2 border-transparent rounded-lg py-3 px-4 text-center focus:outline-none focus:border-indigo-500 transition-colors" aria-label="Enter quiz topic">
+<input type="number" id="questions-count-input" class="w-full bg-white bg-opacity-10 text-white placeholder-gray-400 border-2 border-transparent rounded-lg py-3 px-4 text-center focus:outline-none focus:border-indigo-500 transition-colors" min="1" max="500" aria-label="Number of questions">
 <label for="difficulty-input" id="difficulty-label" class="block text-gray-300 text-sm font-bold mb-2 sr-only"></label>
-<select id="difficulty-input" class="w-full bg-gray-800 text-white border-2 border-gray-700 rounded-lg py-3 px-4 text-center text-base md:text-lg focus:outline-none focus:border-cyan-500 transition-colors" aria-labelledby="difficulty-label">
+<select id="difficulty-input" class="w-full bg-white bg-opacity-10 text-white border-2 border-transparent rounded-lg py-3 px-4 text-center focus:outline-none focus:border-indigo-500 transition-colors" aria-labelledby="difficulty-label">
 <option value="easy">Easy / आसान</option>
 <option value="medium">Medium / मध्यम</option>
 <option value="hard">Hard / कठिन</option>
 </select>
 </div>
 
-<button id="start-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg text-lg md:text-xl btn shadow-lg mb-6"></button>
+<button id="start-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-lg md:text-xl btn-futuristic shadow-lg mb-6"></button>
 
 <div id="history-container" class="mt-6 text-left">
-<h3 id="history-title" class="text-base font-semibold text-cyan-300 mb-2"></h3>
-<ul id="topic-history" class="max-h-32 overflow-y-auto bg-gray-800/50 rounded-lg p-2 text-sm">
+<h3 id="history-title" class="text-base font-semibold text-indigo-300 mb-2"></h3>
+<ul id="topic-history" class="max-h-32 overflow-y-auto bg-white bg-opacity-10 rounded-lg p-2 text-sm">
 </ul>
 </div>
 </div>
 
-<div id="quiz-screen" class="hidden p-6 rounded-2xl shadow-2xl card">
+<div id="quiz-screen" class="hidden p-6 futuristic-card">
 <div class="flex justify-between items-center mb-4">
 <p id="progress-text" class="text-base md:text-lg text-gray-300"></p>
 <p id="total-timer-display" class="text-lg font-bold text-yellow-400"></p>
-<p id="score-display" class="text-base md:text-lg font-bold text-cyan-400"></p>
+<p id="score-display" class="text-base md:text-lg font-bold text-indigo-400"></p>
 </div>
 <div id="progress-bar-container"><div id="progress-bar"></div></div>
-<div class="flex justify-center items-center mt-4">
-<p id="streak-counter" class="text-xl font-bold italic"></p>
-</div>
-<div id="question-container" class="bg-gray-800/50 p-4 rounded-lg mt-4 mb-4 min-h-[80px] flex items-center justify-center">
+<div id="question-container" class="bg-white bg-opacity-10 p-4 rounded-lg mt-4 mb-4 min-h-[80px] flex items-center justify-center">
 <p id="question-text" class="text-lg md:text-xl text-center font-semibold"></p>
 </div>
 <div id="options-container" class="grid grid-cols-1 gap-3"></div>
-<div id="explanation-container" class="hidden mt-4 p-3 bg-gray-800/70 rounded-lg text-sm">
-<h4 id="explanation-title" class="font-bold text-cyan-300 mb-1"></h4>
-<p id="explanation-text" class="text-gray-300"></p>
+<div id="explanation-container" class="hidden mt-4 p-3 bg-white bg-opacity-10 rounded-lg text-sm">
+<h4 id="explanation-title" class="font-bold text-purple-300 mb-1"></h4>
+<p id="explanation-text" class="text-gray-200"></p>
 </div>
 <div id="navigation-container" class="flex justify-between mt-4">
-<button id="prev-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg btn text-sm"></button>
-<button id="home-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg btn text-sm"></button>
-<button id="next-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg btn text-sm"></button>
+<button id="prev-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg btn-futuristic text-sm"></button>
+<button id="home-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg btn-futuristic text-sm"></button>
+<button id="next-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg btn-futuristic text-sm"></button>
 </div>
 </div>
 
-<div id="results-screen" class="hidden text-center p-8 rounded-2xl shadow-2xl card">
-<h2 id="results-title" class="text-2xl font-bold mb-4 text-cyan-400"></h2>
+<div id="results-screen" class="hidden text-center p-8 futuristic-card">
+<h2 id="results-title" class="text-2xl font-bold mb-4 text-indigo-400"></h2>
 <p id="final-score-text" class="text-xl mb-4"></p>
 <p id="final-time-text" class="text-xl mb-6"></p>
 <div class="flex flex-col gap-4">
-<button id="play-again-btn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn shadow-lg"></button>
-<button id="share-score-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn shadow-lg mt-2"></button>
-<button id="whatsapp-channel-btn-results" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg text-lg btn shadow-lg mt-4 whatsapp-half-glow-btn">
+<button id="play-again-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn-futuristic shadow-lg"></button>
+<button id="share-score-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn-futuristic shadow-lg mt-2"></button>
+<button id="whatsapp-channel-btn-results" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 rounded-lg text-lg btn-futuristic shadow-lg mt-4 whatsapp-half-glow-btn">
 Join Our WhatsApp Channel
 </button>
-<button id="home-btn-results" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn shadow-lg"></button>
+<button id="home-btn-results" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg btn-futuristic shadow-lg"></button>
 </div>
 </div>
 
 <div id="loader" class="hidden text-center p-8">
 <div class="flex justify-center items-center">
-<div class="animate-spin rounded-full h-12 w-12 border-b-4 border-cyan-400"></div>
+<div class="animate-spin rounded-full h-12 w-12 border-b-4 border-indigo-400"></div>
 </div>
 <p id="loader-text" class="mt-4 text-base"></p>
 </div>
@@ -370,11 +241,6 @@ Join Our WhatsApp Channel
 </div>
 </div>
 
-<script>
-if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('sw.js');
-}
-</script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 const langScreen = document.getElementById('language-selection-screen');
@@ -424,19 +290,17 @@ const topicHistoryList = document.getElementById('topic-history');
 const messageBox = document.getElementById('message-box');
 const messageText = document.getElementById('message-text');
 const progressBar = document.getElementById('progress-bar');
-const appContainer = document.getElementById('app-container');
-const streakCounter = document.getElementById('streak-counter');
 
 let questions = [];
 let userAnswers = [];
 let currentQuestionIndex = 0;
 let score = 0;
-let correctStreak = 0; // New variable for streak counter
 let currentLanguage = 'en';
 let currentTopic = '';
 let totalTimer = null;
 let startTime = 0;
 let elapsedTime = 0;
+
 const gameLink = '';
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -462,8 +326,8 @@ const uiStrings = {
 'en': {
 mainTitle: 'AI-Powered Quiz Game',
 mainSubtitle: 'Test your knowledge on any topic!',
-topicPlaceholder: 'Enter any topic (e.g.Science)',
-questionsCountPlaceholder: 'Number of questions (Maxi:200)',
+topicPlaceholder: 'Enter any topic (e.g., History of India)',
+questionsCountPlaceholder: 'Number of questions (e.g.20)',
 difficultyLabel: 'Select Difficulty',
 startBtn: 'Start Quiz',
 historyTitle: 'Recent Topics:',
@@ -487,7 +351,6 @@ errorQuestionCount: 'Please choose between 1 and 200 questions.',
 errorAPIFail: 'Failed to generate questions. Please try again.',
 apiCountWarning: (count) => `The AI could only generate ${count} questions.`,
 invalidJson: 'Received invalid data from AI. Please try again.',
-streakText: (count) => `🔥 Streak: ${count}`,
 
 menuTitle: 'Menu',
 menuHome: 'Home',
@@ -521,7 +384,7 @@ shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n�
 mainTitle: 'AI-Powered Quiz Game',
 mainSubtitle: 'किसी भी विषय पर अपनी ज्ञान की परीक्षा करें!',
 topicPlaceholder: 'कोई विषय दर्ज करें (जैसे:विज्ञान)',
-questionsCountPlaceholder: 'प्रश्नों की संख्या (Maxi:200)',
+questionsCountPlaceholder: 'प्रश्नों की संख्या (जैसे:20)',
 difficultyLabel: 'कठिनाई स्तर चुनें',
 startBtn: 'क्विज़ शुरू करें',
 historyTitle: 'पिछला इतिहास:',
@@ -545,7 +408,6 @@ errorQuestionCount: 'कृपया 1 और 200 के बीच प्रश�
 errorAPIFail: 'प्रश्न बनाने में विफल। कृपया पुनः प्रयास करें।',
 apiCountWarning: (count) => `AI केवल ${count} प्रश्न ही बना सका।`,
 invalidJson: 'AI से अमान्य डेटा प्राप्त हुआ। कृपया पुनः प्रयास करें।',
-streakText: (count) => `🔥 स्ट्रीक: ${count}`,
 
 menuTitle: 'मेनू',
 menuHome: 'होम',
@@ -569,9 +431,10 @@ helpText: `
 <p>7. <b>परिणाम देखें:</b> अंतिम प्रश्न के बाद, आपका अंतिम स्कोर और क्विज़ पूरा करने में लगा कुल समय प्रदर्शित होगा।
 आप फिर से खेल सकते हैं या होम स्क्रीन पर वापस जा सकते हैं।</p>
 <p>8. <b>स्कोर साझा करें:</b> अपने क्विज़ परिणामों को दोस्तों के साथ साझा करें!</p>
-<p>9. <b>App की तरह use करे:</b>आप इसे एक ऐप की तरह इस्तेमाल कर सकते हैं।
+<p>9. <b>App की तरह इस्तेमाल करें:</b>आप इसे ऐप की तरह इस्तेमाल कर सकते हैं।
 बस इसे क्रोम ब्राउज़र में खोलें, ब्राउज़र में सबसे ऊपर दिए गए तीन बिंदुओं पर क्लिक करें और "होम स्क्रीन में जोड़ें" चुनें।
-ऐसा करने से यह ऐप आपके डिवाइस की होम स्क्रीन पर आ जाएगा और आप इसे ऐप की तरह इस्तेमाल कर सकते हैं।</p>
+ऐसा करने से यह ऐप्लिकेशन आपके डिवाइस की होम स्क्रीन पर आ जाएगा और आप इसे ऐप की तरह इस्तेमाल कर सकते हैं!</p>
+ 
 `,
 shareMessage: (quizTitle, score, total, topic, link) => `💡 ${quizTitle}\n\n🗒 विषय: ${topic}\n✅️ स्कोर: ${score}/${total}\n\n😅 क्या आप मेरा स्कोर हरा सकते हैं?\n\n⭐️ यहां खेलें, और अपने ज्ञान की परीक्षा करें 👇\n${link}`
 }
@@ -671,15 +534,13 @@ quizScreen.classList.remove('hidden');
 
 currentQuestionIndex = 0;
 score = 0;
-correctStreak = 0;
 userAnswers = new Array(questions.length).fill(null);
 scoreDisplay.textContent = `${uiStrings[currentLanguage].score}: 0`;
-streakCounter.textContent = uiStrings[currentLanguage].streakText(0);
 startTotalTimer();
 
 displayQuestion();
 } catch (error) {
-console.error('Error during quiz generation or API call:', error);
+console.error('क्विज़ जनरेशन या एपीआई कॉल के दौरान त्रुटि:', error);
 showMessage(error.message || uiStrings[currentLanguage].errorAPIFail);
 loader.classList.add('hidden');
 startScreen.classList.remove('hidden');
@@ -754,7 +615,7 @@ showMessage(uiStrings[currentLanguage].apiCountWarning(questions.length));
 }
 return;
 } catch (parseError) {
-console.error('JSON parsing error:', parseError);
+console.error('JSON पार्सिंग त्रुटि:', parseError);
 throw new Error(uiStrings[currentLanguage].invalidJson);
 }
 } else {
@@ -764,7 +625,7 @@ throw new Error(uiStrings[currentLanguage].errorAPIFail);
 if (i === retries - 1) {
 throw error;
 }
-console.warn(`Attempt ${i + 1} failed, retrying...`, error);
+console.warn(`प्रयास ${i + 1} विफल, पुनः प्रयास कर रहा है...`, error);
 }
 }
 }
@@ -775,20 +636,10 @@ optionsContainer.innerHTML = '';
 
 const currentQuestion = questions[currentQuestionIndex];
 questionText.textContent = currentQuestion.question;
-
 progressText.textContent = `${uiStrings[currentLanguage].questionProgress} ${currentQuestionIndex + 1} / ${questions.length}`;
 
-// Update progress bar
 const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
 progressBar.style.width = `${progressPercentage}%`;
-
-// Update streak counter visibility
-if (correctStreak > 0) {
-streakCounter.textContent = uiStrings[currentLanguage].streakText(correctStreak);
-streakCounter.classList.remove('hidden');
-} else {
-streakCounter.classList.add('hidden');
-}
 
 const shuffledOptions = [...currentQuestion.options];
 shuffleArray(shuffledOptions);
@@ -796,7 +647,7 @@ shuffleArray(shuffledOptions);
 shuffledOptions.forEach(option => {
 const button = document.createElement('button');
 button.textContent = option;
-button.classList.add('option-btn', 'w-full', 'p-3', 'md:p-4', 'rounded-lg', 'text-left', 'bg-gray-700', 'hover:bg-gray-600', 'border-2', 'border-transparent', 'focus:outline-none', 'focus:border-cyan-500', 'transition-colors', 'text-base');
+button.classList.add('option-btn', 'w-full', 'p-3', 'md:p-4', 'rounded-lg', 'text-left', 'bg-white', 'bg-opacity-10', 'hover:bg-white', 'hover:bg-opacity-20', 'border-2', 'border-transparent', 'focus:outline-none', 'focus:border-indigo-500', 'transition-colors', 'text-base', 'btn-futuristic');
 button.addEventListener('click', () => handleOptionClick(option, button));
 optionsContainer.appendChild(button);
 });
@@ -813,27 +664,15 @@ if (userAnswers[currentQuestionIndex] !== null) return;
 
 userAnswers[currentQuestionIndex] = { selected: selectedOption };
 
-const isCorrect = selectedOption.trim() === questions[currentQuestionIndex].answer.trim();
-
-if (isCorrect) {
+if (selectedOption.trim() === questions[currentQuestionIndex].answer.trim()) {
 score++;
-correctStreak++;
 scoreDisplay.textContent = `${uiStrings[currentLanguage].score}: ${score}`;
-streakCounter.textContent = uiStrings[currentLanguage].streakText(correctStreak);
-appContainer.classList.add('bg-flash-correct');
 playSound(600, 'sine');
 } else {
-correctStreak = 0;
-streakCounter.classList.add('hidden');
-appContainer.classList.add('bg-flash-incorrect');
 playSound(200, 'square');
 }
 
 showAnswerResult(userAnswers[currentQuestionIndex]);
-
-setTimeout(() => {
-appContainer.classList.remove('bg-flash-correct', 'bg-flash-incorrect');
-}, 500);
 }
 
 function showAnswerResult(answerData) {
@@ -895,7 +734,7 @@ title: t.mainTitle,
 text: shareText,
 url: gameLink
 }).catch((error) => {
-console.error('Error sharing with Web Share API:', error);
+console.error('वेब शेयर एपीआई के साथ साझा करने में त्रुटि:', error);
 const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
 window.open(whatsappUrl, '_blank');
 });
@@ -922,7 +761,6 @@ questions = [];
 userAnswers = [];
 currentQuestionIndex = 0;
 score = 0;
-correctStreak = 0;
 currentTopic = '';
 elapsedTime = 0;
 progressBar.style.width = '0%';
@@ -946,7 +784,7 @@ historyContainer.classList.remove('hidden');
 history.forEach(topic => {
 const li = document.createElement('li');
 li.textContent = topic;
-li.className = 'p-2 rounded-md text-gray-300';
+li.className = 'p-2 rounded-md text-gray-300 transition-colors hover:bg-white hover:bg-opacity-20 cursor-pointer';
 li.addEventListener('click', () => {
 topicInput.value = topic;
 });
@@ -985,7 +823,7 @@ menuContentText.innerHTML = t.descriptionText;
 let whatsappButtonInMenu = document.createElement('button');
 whatsappButtonInMenu.id = 'whatsapp-channel-btn-menu';
 whatsappButtonInMenu.textContent = t.whatsappChannelBtn;
-whatsappButtonInMenu.classList.add('w-full', 'bg-emerald-500', 'hover:bg-emerald-600', 'text-white', 'font-bold', 'py-3', 'px-6', 'rounded-lg', 'text-lg', 'btn', 'shadow-lg', 'mt-4', 'whatsapp-half-glow-btn');
+whatsappButtonInMenu.classList.add('w-full', 'bg-emerald-500', 'hover:bg-emerald-600', 'text-white', 'font-bold', 'py-3', 'px-6', 'rounded-lg', 'text-lg', 'btn-futuristic', 'shadow-lg', 'mt-4');
 
 whatsappButtonInMenu.addEventListener('click', () => {
 window.open('https://whatsapp.com/channel/0029Vb6ZMmI3wtb6E8Jw3w28', '_blank');
@@ -1022,9 +860,20 @@ resetGame();
 menuDescriptionBtn.addEventListener('click', () => updateMenuContent('description'));
 menuHelpBtn.addEventListener('click', () => updateMenuContent('help'));
 
+window.addEventListener('resize', () => {
+const appContainer = document.getElementById('app-container');
+const gameWrapper = document.getElementById('game-wrapper');
+const maxWidth = 450;
+const aspectRatio = 9 / 16;
+const currentWidth = Math.min(gameWrapper.clientWidth, maxWidth);
+appContainer.style.width = `${currentWidth}px`;
+appContainer.style.height = `${currentWidth / aspectRatio}px`;
+});
+
+window.dispatchEvent(new Event('resize'));
 updateMenuContent('description');
 updateUIText();
 });
 </script>
 </body>
-  </html>
+</html>
